@@ -1,0 +1,330 @@
+/* 
+   PrivacyFlow Interactive Infographic CSS
+   Theme: Data Modernism & Glassmorphism
+*/
+
+:root {
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4338ca;
+    --secondary: #10b981;
+    --accent: #f59e0b;
+    --bg-dark: #0f172a;
+    --bg-dark-alt: #1e293b;
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Timeline V2 - Center Path */
+.timeline-v2 {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.timeline-v2::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--primary), var(--secondary), transparent);
+    top: 0;
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50%;
+    position: relative;
+    margin-bottom: 4rem;
+    width: 100%;
+}
+
+.timeline-item:nth-child(even) {
+    justify-content: flex-start;
+    padding-right: 0;
+    padding-left: 50%;
+}
+
+.timeline-marker {
+    position: absolute;
+    right: -60px;
+    top: 0;
+    width: 120px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--primary);
+    background: var(--bg-dark);
+    padding: 0.5rem;
+    z-index: 10;
+}
+
+.timeline-item:nth-child(even) .timeline-marker {
+    left: -60px;
+    right: auto;
+}
+
+.timeline-content {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 90%;
+    margin-right: 40px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-right: 0;
+    margin-left: 40px;
+}
+
+.timeline-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary);
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-light);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.timeline-content p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.milestone-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.milestone-badge.global { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+.milestone-badge.local { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+.milestone-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.action-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* PH Highlight */
+.highlight-ph {
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.highlight-ph::after {
+    background: var(--accent);
+}
+
+.milestone-marker-inner {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+}
+
+/* Bento Grid */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.bento-item {
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    padding: 2.5rem;
+    border-radius: 24px;
+    transition: var(--transition);
+}
+
+.bento-item:hover {
+    transform: scale(1.02);
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.bento-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.bento-item h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.bento-item p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Quiz Styles */
+.quiz-card-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quiz-card {
+    background: var(--bg-dark-alt);
+    border: 1px solid var(--glass-border);
+    border-radius: 32px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-badge {
+    background: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.question {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 2rem 0;
+    line-height: 1.4;
+}
+
+.options-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.quiz-option {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 1.5rem;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.1rem;
+}
+
+.quiz-option:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary);
+}
+
+.quiz-option.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+/* Results View */
+.results-view {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.results-icon {
+    font-size: 5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.score-circle {
+    display: inline-block;
+    padding: 2rem;
+    border-radius: 50%;
+    border: 4px solid var(--primary);
+    margin: 2rem 0;
+}
+
+.score-circle span {
+    font-size: 4rem;
+    font-weight: 800;
+    font-family: 'Outfit';
+}
+
+.summary-toggle {
+    cursor: pointer;
+    color: var(--primary-light);
+    margin: 1rem 0;
+    font-weight: 600;
+}
+
+.summary-box {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Glass Modal */
+.glass-modal {
+    background: rgba(15, 23, 42, 0.9) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 24px !important;
+}
+
+.modal-header { border-bottom: none; padding: 2rem 2rem 1rem; }
+.modal-footer { border-top: none; padding: 1rem 2rem 2rem; }
+.modal-body { padding: 0 2rem; font-size: 1.1rem; line-height: 1.7; color: var(--text-muted); }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timeline-v2::before { left: 20px; }
+    .timeline-item { padding-right: 0; padding-left: 60px; justify-content: flex-start; }
+    .timeline-item:nth-child(even) { padding-left: 60px; }
+    .timeline-marker { left: -10px !important; right: auto; text-align: left; background: transparent; }
+    .timeline-content { margin-left: 0 !important; width: 100%; }
+    .hero-title { font-size: 3rem; }
+}

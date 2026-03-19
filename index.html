@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Privacy Law Timeline | Interactive Evolution of Data Protection</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+
+    <!-- Animation Library (Simulated with CSS + Intersection Observer) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- Standard Template Base (keeping for some utility classes but will override mostly) -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Custom Infographic Styles -->
+    <link rel="stylesheet" href="custom_style.css">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .font-outfit {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Glassmorphic Navbar */
+        .modern-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .modern-nav.scrolled {
+            padding: 0.75rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link-item {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link-item:hover {
+            color: var(--primary);
+        }
+
+        .nav-link-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-link-item:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent),
+                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.1), transparent);
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            z-index: -1;
+            mask-image: linear-gradient(to bottom, black, transparent);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0) translateX(-50%);
+            }
+
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        /* Section Layout */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .modern-footer {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="modern-nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <i class="mdi mdi-shield-check-outline"></i>
+                PrivacyFlow
+            </a>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link-item">Home</a>
+                <a href="#timeline-section" class="nav-link-item">Timeline</a>
+                <a href="#trends-section" class="nav-link-item">Future Trends</a>
+                <a href="#quiz-section" class="nav-link-item">Knowledge Quiz</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <img src="hero.png" class="hero-bg-img" alt="Privacy Background">
+        <div class="hero-content">
+            <h1 class="hero-title animate__animated animate__fadeInDown">Evolution of Data Protection</h1>
+            <p class="hero-subtitle animate__animated animate__fadeInUp">Journey through the history of global and
+                Philippine privacy laws, from the right to be let alone to the digital age of AI and synthetic data.</p>
+            <div class="d-flex justify-content-center gap-3 animate__animated animate__fadeInUp animate__delay-1s">
+                <a href="#timeline-section" class="btn btn-primary btn-lg rounded-pill px-4 py-2 font-outfit">Explore
+                    Timeline</a>
+                <a href="#quiz-section" class="btn btn-outline-light btn-lg rounded-pill px-4 py-2 font-outfit">Take the
+                    Quiz</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="mdi mdi-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- Timeline Section -->
+    <section id="timeline-section">
+        <div class="section-header reveal">
+            <h2 class="section-title">The Privacy Journey</h2>
+            <p class="section-desc">Trace the development of privacy rights from the earliest concepts to modern-day
+                global regulations.</p>
+        </div>
+
+        <div class="timeline-v2">
+            <!-- 1. 1890 Warren and Brandeis -->
+            <div class="timeline-item reveal">
+                <div class="timeline-marker">1890</div>
+                <div class="timeline-content">
+                    <div class="milestone-badge global">Global (USA)</div>
+                    <h3>The Right to Privacy</h3>
+                    <p>Samuel Warren and Louis Brandeis published "The Right to Privacy" in the Harvard Law Review,
+                        introducing the concept of “the right to be let alone.”</p>
+                    <div class="milestone-actions">
+                        <button class="action-btn"
+                            onclick="showFact('Why This Matters?', 'This introduced the idea that individuals have a legal right to privacy, especially against media intrusion. It laid the foundation for modern privacy laws and influenced courts around the world.')">💡
+                            Importance</button>
+                        <button class="action-btn"
+                            onclick="showFact('Fun Fact', 'The article was written because the authors were frustrated with newspapers invading personal lives. It is still cited in legal cases more than 100 years later.')">✨
+                            Fun Fact</button>
+                        <button class="action-btn"
+                            onclick="showFact('Real-World Example', 'Laws protecting celebrities and ordinary people from paparazzi are based on this concept. It also supports rules against publishing private photos without consent.')">🌎
+                            Example</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 1948 UDHR -->
+            <div class="timeline-item reveal">
+                <div class="timeline-marker">1948</div>
+                <div class="timeline-content">
+                    <div class="milestone-badge global">Global (UN)</div>
+                    <h3>Universal Declaration of Human Rights</h3>
+                    <p>Adopted by the UN after WWII, Article 12 protects individuals’ privacy and recognizes it as a
+                        basic human right.</p>
+                    <div class="milestone-actions">
+                        <button class="action-btn"
+                            onclick="showFact('Why This Matters?', 'It officially recognized privacy as a fundamental human right under Article 12. This influenced many countries to include privacy protection in their laws and constitutions.')">💡
+                            Importance</button>
+                        <button class="action-btn"
+                            onclick="showFact('Fun Fact', 'It was created after World War II to prevent abuse of human rights by governments. It has been translated into over 500 languages.')">✨
+                            Fun Fact</button>
+                        <button class="action-btn"
+                            onclick="showFact('Real-World Example', 'Many modern data protection laws are based on this declaration. Governments use it as a guide when creating policies on surveillance and personal data.')">🌎
+                            Example</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 1974 Privacy Act -->
+            <div class="timeline-item reveal">
+                <div class="timeline-marker">1974</div>
+                <div class="timeline-content">
+                    <div class="milestone-badge global">Global (USA)</div>
+                    <h3>Privacy Act of 1974</h3>
+                    <p>Regulates how U.S. government agencies handle personal data, giving individuals access to their
+                        records and allowing corrections.</p>
+                    <div class="milestone-actions">
+                        <button class="action-btn"
+                            onclick="showFact('Why This Matters?', 'This law controls how U.S. government agencies collect, use, and store personal data. It also gives citizens the right to access and correct their personal records.')">💡
+                            Importance</button>
+                        <button class="action-btn"
+                            onclick="showFact('Fun Fact', 'It was passed after the Watergate scandal, which exposed misuse of personal information. This event increased public awareness of privacy risks.')">✨
+                            Fun Fact</button>
+                        <button class="action-btn"
+                            onclick="showFact('Real-World Example', 'A person can request a copy of their government-held data and ask for corrections if it is wrong. This helps prevent misuse or errors in official records.')">🌎
+                            Example</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 1981 Convention 108 -->
+            <div class="timeline-item reveal">
+                <div class="timeline-marker">1981</div>
+                <div class="timeline-content">
+                    <div class="milestone-badge global">Treaty</div>
+                    <h3>Convention 108</h3>
+                    <p>The first international treaty on data protection, setting standards for handling personal data
+                        and open to countries beyond Europe.</p>
+                    <div class="milestone-actions">
+                        <button class="action-btn"
+                            onclick="showFact('Why This Matters?', 'It is the first legally binding international treaty focused on data protection. It encouraged countries to adopt similar privacy standards globally.')">💡
+                            Importance</button>
+                        <button class="action-btn"
+                            onclick="showFact('Fun Fact', 'It is still active today and has been updated to include digital privacy concerns. Even non-European countries can join this agreement.')">✨
+                            Fun Fact</button>
+                        <button class="action-btn"
+                            onclick="showFact('Real-World Example', 'Many national data privacy laws were influenced by this treaty. It helped create consistent rules for handling personal data across borders.')">🌎
+                            Example</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 1995 Directive -->
+            <div class="timeline-item reveal">
+                <div class="timeline-marker">1995</div>
+                <div class="timeline-content">
+                    <div class="milestone-badge global">Europe</div>
+                    <h3>Data Protection Directive</h3>
+                    <p>Standardized data protection across EU countries and introduced consent and data security
+                        principles (95/46/EC).</p>
+                    <div class="milestone-actions">
+                        <button class="action-btn"
+                            onclick="showFact('Why This Matters?', 'It created a unified data protection framework across European Union countries. It introduced important principles like consent and data security.')">💡
+                            Importance</button>
+                        <button class="action-btn"
+                            onclick="showFact('Fun Fact', 'This law existed before social media platforms became popular. Despite that, its principles are still used today.')">✨
+                            Fun Fact</button>
+                        <button class="action-btn"
+                            onclick="showFact('Real-World Example', 'Companies were required to inform users about data collection and ask for permission. This changed how businesses handle customer information.')">🌎
+                            Example</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. 2012 PH DPA -->
+            <div class="timeline-item reveal">
+                <div class="timeline-marker ph">2012</div>
+                <div class="timeline-content highlight-ph">
+                    <div class="milestone-marker-inner">🇵🇭</div>
+                    <div class="milestone-badge local">Philippines</div>
+                    <h3>Data Privacy Act (RA 10173)</h3>
+                    <p>Protects personal data in the Philippines and created the National Privacy Commission (NPC) to
+                        enforce data protection rules.</p>
+                    <div class="milestone-actions">
+                        <button class="action-btn"
+                            onclick="showFact('Why This Matters?', 'This law protects the personal information of Filipinos in both public and private sectors. It also created the National Privacy Commission to enforce data protection rules.')">💡
+                            Importance</button>
+                        <button class="action-btn"
+                            onclick="showFact('Fun Fact', 'The Philippines was among the first Southeast Asian countries to implement a comprehensive data privacy law. It aligns with global standards like GDPR.')">✨
+                            Fun Fact</button>
+                        <button class="action-btn"
+                            onclick="showFact('Real-World Example', 'Schools, banks, and online businesses must secure personal data and ask for consent before collecting information. Violations can result in penalties and legal action.')">🌎
+                            Example</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 2016 GDPR -->
+            <div class="timeline-item reveal">
+                <div class="timeline-marker">2016</div>
+                <div class="timeline-content">
+                    <div class="milestone-badge global">Global (EU)</div>
+                    <h3>General Data Protection Regulation</h3>
+                    <p>Strengthened data protection across the EU, introduced strict rules on data handling, and
+                        enforced heavy penalties for violations.</p>
+                    <div class="milestone-actions">
+                        <button class="action-btn"
+                            onclick="showFact('Why This Matters?', 'GDPR is one of the strictest privacy laws in the world, requiring companies to protect user data and report breaches. It also gives users rights such as access, correction, and deletion of their data.')">💡
+                            Importance</button>
+                        <button class="action-btn"
+                            onclick="showFact('Fun Fact', 'Companies can be fined up to billions of dollars for violations. Even non-European companies must follow GDPR if they handle EU data.')">✨
+                            Fun Fact</button>
+                        <button class="action-btn"
+                            onclick="showFact('Real-World Example', 'Websites now display cookie consent pop-ups due to GDPR requirements. Companies must clearly explain how they use personal data.')">🌎
+                            Example</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. 2021 PH NPC -->
+            <div class="timeline-item reveal">
+                <div class="timeline-marker ph">2021</div>
+                <div class="timeline-content highlight-ph">
+                    <div class="milestone-marker-inner">🇵🇭</div>
+                    <div class="milestone-badge local">Philippines</div>
+                    <h3>NPC Circulars and Guidelines Updates</h3>
+                    <p>Updated rules under the Data Privacy Act, strengthening data breach reporting and improved
+                        enforcement of privacy laws.</p>
+                    <div class="milestone-actions">
+                        <button class="action-btn"
+                            onclick="showFact('Why This Matters?', 'These updates strengthened the enforcement of the Data Privacy Act in the Philippines. They introduced stricter rules for data breaches and accountability.')">💡
+                            Importance</button>
+                        <button class="action-btn"
+                            onclick="showFact('Fun Fact', 'Companies are required to report data breaches within a specific time frame. Failure to do so can result in penalties.')">✨
+                            Fun Fact</button>
+                        <button class="action-btn"
+                            onclick="showFact('Real-World Example', 'If a company experiences a data leak, it must inform affected users and the National Privacy Commission. This helps users take action to protect their information.')">🌎
+                            Example</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Trends Section -->
+    <section id="trends-section" class="bg-dark-alt">
+        <div class="section-header reveal">
+            <h2 class="section-title">The Horizon of Privacy</h2>
+            <p class="section-desc">As technology evolves, the way we protect our digital identity is transforming.
+                Here's what's coming next.</p>
+        </div>
+
+        <div class="bento-grid">
+            <div class="bento-item reveal">
+                <div class="bento-icon"><i class="mdi mdi-robot"></i></div>
+                <h3>AI Governance</h3>
+                <p>Regulation will focus on algorithmic transparency and mandatory audits for automated decisions.</p>
+            </div>
+            <div class="bento-item reveal">
+                <div class="bento-icon"><i class="mdi mdi-account-star"></i></div>
+                <h3>Children's Digital Rights</h3>
+                <p>Strict age verification and age-appropriate design codes for social platforms.</p>
+            </div>
+            <div class="bento-item reveal">
+                <div class="bento-icon"><i class="mdi mdi-gavel"></i></div>
+                <h3>Privacy Litigation</h3>
+                <p>Surge in lawsuits targeting tracking pixels and deceptive data practices.</p>
+            </div>
+            <div class="bento-item reveal">
+                <div class="bento-icon"><i class="mdi mdi-earth-arrow-right"></i></div>
+                <h3>Data Sovereignty</h3>
+                <p>Fractured data flows as nations prioritize local security over global transfers.</p>
+            </div>
+            <div class="bento-item reveal">
+                <div class="bento-icon"><i class="mdi mdi-incognito"></i></div>
+                <h3>Standardized PETs</h3>
+                <p>Gold-standard anonymization using synthetic data and federated learning.</p>
+            </div>
+            <div class="bento-item reveal">
+                <div class="bento-icon"><i class="mdi mdi-handshake"></i></div>
+                <h3>Cross-Watchdog Cooperation</h3>
+                <p>Oversight from privacy, antitrust, and cybersecurity regulators working together.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz-section">
+        <div class="section-header reveal">
+            <h2 class="section-title">Knowledge Quest</h2>
+            <p class="section-desc">Test your privacy expertise. How well do you know the milestones?</p>
+        </div>
+
+        <div class="quiz-card-wrapper reveal">
+            <div class="quiz-card">
+                <div class="quiz-header">
+                    <span id="quiz-progress" class="quiz-badge">Question 1 of 10</span>
+                </div>
+
+                <div id="quiz-container">
+                    <div id="quiz-qa">
+                        <p id="question-text" class="question"></p>
+                        <div id="options-container" class="options-grid">
+                            <!-- Options will be injected here -->
+                        </div>
+                        <div class="quiz-footer">
+                            <button id="submit-btn" class="btn btn-primary rounded-pill px-5"
+                                onclick="handleQuizSubmit()" disabled>Next Question</button>
+                        </div>
+                    </div>
+
+                    <div id="quiz-results" class="results-view d-none">
+                        <div class="mdi mdi-trophy-outline results-icon"></div>
+                        <h3>Quest Complete!</h3>
+                        <div class="score-circle">
+                            <span id="final-score">0</span>
+                            <small>/ 10</small>
+                        </div>
+                        <p id="score-feedback" class="feedback-text"></p>
+
+                        <div class="summary-toggle" onclick="toggleSummary()">
+                            View Detailed Breakdown <i class="mdi mdi-chevron-down"></i>
+                        </div>
+                        <div id="summary-results-container" class="summary-box d-none">
+                            <!-- Answer summary will be injected here -->
+                        </div>
+
+                        <button class="btn btn-outline-primary rounded-pill px-5 mt-4" onclick="resetQuiz()">Try
+                            Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="modern-footer">
+        <p class="mb-2">PrivacyFlow Evolution © 2026</p>
+        <p class="text-muted small">An interactive dive into the digital rights that define our world.</p>
+    </footer>
+
+    <!-- Centered Modal for facts -->
+    <div class="modal fade" id="factModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content glass-modal border-0">
+                <div class="modal-header">
+                    <h5 class="modal-title font-outfit text-primary" id="factTitle">Interactive Highlight</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="factContent"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary rounded-pill" data-bs-dismiss="modal">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <script src="custom_script.js"></script>
+
+    <script>
+        // Scroll Reveal Implementation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", function () {
+            const nav = document.querySelector(".modern-nav");
+            if (window.scrollY > 50) {
+                nav.classList.add("scrolled");
+            } else {
+                nav.classList.remove("scrolled");
+            }
+        });
+
+        function toggleSummary() {
+            const container = document.getElementById('summary-results-container');
+            const icon = document.querySelector('.summary-toggle i');
+            container.classList.toggle('d-none');
+            icon.classList.toggle('mdi-chevron-down');
+            icon.classList.toggle('mdi-chevron-up');
+        }
+    </script>
+</body>
+
+</html>
